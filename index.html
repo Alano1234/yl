@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>忒修斯号 · 第一夜</title>
+<style>
+:root{
+  --bg:#080b12;--panel:#111724;--panel2:#151d2b;--line:#2b3648;--text:#f4f6fb;--muted:#99a5b7;
+  --gold:#e5bd76;--gold2:#ffe4a7;--ice:#9ed7e6;--rose:#efadc8;--red:#e88991;--green:#91d0ad;
+  --shadow:0 20px 80px rgba(0,0,0,.38);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:radial-gradient(circle at 20% 0,#1b283b 0,#0c111b 35%,#07090e 100%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",Segoe UI,sans-serif}
+button{font:inherit}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.02),transparent 20%,transparent 80%,rgba(0,0,0,.28));z-index:0}
+#app{position:relative;z-index:1;max-width:1500px;margin:0 auto;padding:18px}
+.top{display:flex;justify-content:space-between;gap:20px;align-items:flex-end;margin-bottom:14px}
+.brand small{font-size:11px;letter-spacing:2.4px;color:var(--gold);text-transform:uppercase}.brand h1{font-family:Georgia,"Times New Roman",serif;margin:4px 0 3px;font-size:31px;letter-spacing:.5px}.brand p{margin:0;color:var(--muted);font-size:12px}
+.stats{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}.pill{border:1px solid var(--line);background:rgba(16,22,33,.86);padding:8px 11px;border-radius:10px;min-width:82px}.pill span{display:block;color:var(--muted);font-size:10px}.pill b{font-size:13px}
+.grid{display:grid;grid-template-columns:210px minmax(0,1fr) 320px;gap:12px}.panel{background:rgba(15,21,31,.9);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}.panel h3{margin:0;padding:13px 14px;border-bottom:1px solid var(--line);font-size:12px;color:var(--gold2);letter-spacing:.5px}
+.rooms{padding:8px}.roomBtn{width:100%;border:1px solid transparent;background:transparent;color:var(--muted);padding:10px;border-radius:10px;text-align:left;cursor:pointer;margin:2px 0}.roomBtn:hover{background:#172132;color:var(--text)}.roomBtn.active{background:linear-gradient(90deg,#1f2a3d,#18212f);border-color:#3b4b63;color:var(--text)}.roomName{display:flex;justify-content:space-between}.roomSub{font-size:10px;margin-top:3px;opacity:.72}
+.main{min-height:760px;display:flex;flex-direction:column}.hero{position:relative;padding:20px 20px 16px;border-bottom:1px solid var(--line);overflow:hidden;background:linear-gradient(145deg,#131d2b,#111724 50%,#0f1520)}.hero:after{content:"";position:absolute;width:240px;height:240px;border-radius:50%;right:-85px;top:-130px;background:radial-gradient(circle,rgba(229,189,118,.15),transparent 68%)}.eyebrow{color:var(--gold);font-size:10px;letter-spacing:2px}.hero h2{margin:6px 0 6px;font-family:Georgia,serif;font-size:27px}.hero p{margin:0;color:#bbc4d1;line-height:1.6;font-size:12px;max-width:900px}
+.body{display:grid;grid-template-columns:minmax(0,1fr) 265px;gap:12px;padding:12px;flex:1}.story{min-height:445px;background:#0d131d;border:1px solid #263144;border-radius:13px;padding:16px;line-height:1.78;font-size:13px;overflow:auto}.story p{margin:0 0 10px}.story .narr{color:#dfe5ee}.story .dim{color:#8290a4}.story .warn{color:#f1b0b3}.story .gold{color:var(--gold2)}.story .rabbit{color:#f6c7dc}.story .good{color:var(--green)}.story .sys{font-size:10px;letter-spacing:1px;color:#677487;text-transform:uppercase}.choiceGrid{display:grid;gap:7px;margin-top:12px}.choice{border:1px solid #344052;background:linear-gradient(180deg,#182232,#131b27);color:#eef2f7;border-radius:11px;text-align:left;padding:11px;cursor:pointer}.choice:hover{border-color:#5a6c86;transform:translateY(-1px)}.choice small{display:block;color:#7f8ca0;font-size:10px;margin-top:3px}
+.side{display:flex;flex-direction:column;gap:12px}.miniPanel{background:#0d131d;border:1px solid #263144;border-radius:13px;overflow:hidden}.portraitRow{display:grid;grid-template-columns:78px 1fr;gap:10px;padding:10px}.portrait{width:78px;height:92px;border-radius:12px;overflow:hidden;border:1px solid #344052;background:linear-gradient(145deg,#1e2a3b,#10151d)}.portrait svg{width:100%;height:100%}.charName{font-size:13px;font-weight:700;margin:0 0 3px}.charDesc{font-size:10px;line-height:1.45;color:var(--muted)}.tag{display:inline-block;font-size:9px;border:1px solid #3a4658;padding:3px 6px;border-radius:99px;color:#bcc6d5;margin-top:6px}.goal{padding:12px;font-size:11px;line-height:1.55}.goal strong{color:var(--gold2)}.meters{padding:11px 12px}.meter{margin-bottom:9px}.meterTop{display:flex;justify-content:space-between;font-size:10px;color:var(--muted)}.bar{height:6px;background:#202938;border-radius:99px;overflow:hidden;margin-top:5px}.fill{height:100%;width:0;background:linear-gradient(90deg,var(--ice),var(--gold))}.log{max-height:190px;overflow:auto;padding:4px 12px 10px}.log div{font-size:10px;color:#8793a5;border-bottom:1px solid #1e2735;padding:7px 0;line-height:1.45}.log b{color:#d6dde8}.footer{text-align:center;color:#667487;font-size:9px;margin:10px}
+.overlay{position:fixed;inset:0;background:rgba(3,6,10,.78);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:18px;z-index:10}.modal{width:min(850px,100%);background:linear-gradient(150deg,#141d2b,#0d131c);border:1px solid #3b485c;border-radius:18px;box-shadow:0 40px 120px rgba(0,0,0,.65);padding:24px}.modal small{color:var(--gold);letter-spacing:2px}.modal h2{font-family:Georgia,serif;font-size:28px;margin:7px 0 10px}.modal p{color:#c5cedb;line-height:1.75;font-size:13px}.modal .quote{padding:12px;border-left:3px solid var(--gold);background:#121925;color:#eef0f4;margin:12px 0;border-radius:4px}.modalChoices{display:grid;gap:8px}.modalBtn{border:1px solid #374456;background:#182231;color:#eef2f7;border-radius:10px;padding:12px;text-align:left;cursor:pointer}.modalBtn:hover{background:#1d2a3d;border-color:#5a6e89}.hidden{display:none!important}
+.quick{display:flex;gap:7px;flex-wrap:wrap;margin-top:11px}.quick button{border:1px solid #364052;background:#111925;color:#bdc6d3;border-radius:8px;padding:8px 10px;font-size:10px;cursor:pointer}.quick button:hover{color:white;border-color:#5b6a7d}
+.toast{position:fixed;right:20px;bottom:20px;background:#121a25;border:1px solid #3a4658;color:#e9edf3;padding:10px 13px;border-radius:10px;font-size:11px;opacity:0;transform:translateY(10px);transition:.25s;z-index:30}.toast.show{opacity:1;transform:none}
+@media(max-width:1150px){.grid{grid-template-columns:190px minmax(0,1fr)}.grid>.panel:last-child{grid-column:1/-1}.body{grid-template-columns:1fr}.side{display:grid;grid-template-columns:1fr 1fr}.miniPanel:last-child{grid-column:1/-1}}
+@media(max-width:760px){#app{padding:10px}.top{display:block}.stats{justify-content:flex-start;margin-top:12px}.grid{grid-template-columns:1fr}.grid>.panel:last-child{grid-column:auto}.side{display:flex}.brand h1{font-size:26px}.main{min-height:0}.body{padding:9px}}
+</style>
+</head>
+<body>
+<div id="app">
+<header class="top">
+  <div class="brand"><small>INFINITE INSTANCE / PROTOTYPE 0.2</small><h1>忒修斯号 · 第一夜</h1><p>一艘豪华邮轮。一次没有终点的航行。以及一个坚持自己只是兔子的东西。</p></div>
+  <div class="stats" id="stats"></div>
+</header>
+<div class="grid">
+  <aside class="panel"><h3>船上区域</h3><div class="rooms" id="rooms"></div></aside>
+  <main class="panel main">
+    <section class="hero"><div class="eyebrow" id="eyebrow">甲板 / 23:40</div><h2 id="title">登船</h2><p id="desc">欢迎来到忒修斯号。你的船票没有目的地，只有一个舱房号码。</p><div class="quick" id="quick"></div></section>
+    <section class="body"><div><div class="story" id="story"></div><div class="choiceGrid" id="choices"></div></div><div class="side" id="side"></div></section>
+  </main>
+  <aside class="panel"><h3>本局记录</h3><div class="meters" id="meters"></div><h3>动态记录</h3><div class="log" id="log"></div></aside>
+</div>
+<div class="footer">大型原型：包含自由探索、NPC 状态、行为记录、随机事件、绒团团交易、其他闯关者、结算与多结局。存档写入浏览器本地。</div>
+</div>
+<div class="overlay" id="modal"><div class="modal"><small id="modalTag">副本载入</small><h2 id="modalTitle">忒修斯号</h2><p id="modalText"></p><div class="quote" id="modalQuote"></div><div class="modalChoices" id="modalChoices"></div></div></div>
+<div class="toast" id="toast"></div>
+<script>
+const game={
+ started:false,day:1,time:23*60+40,location:'大厅',sanity:100,points:1200,exp:0,clues:0,explore:0,pressure:0,peopleSaved:0,peopleLost:0,
+ flags:new Set(),visited:new Set(),memories:[],rabbitMood:0,casino:0,trust:{顾医生:0,伊芙:0,沈曜:0,玛芙:0,阿岚:0,寂:0},inventory:[],logs:[],
+ npc:{
+  顾医生:{tag:'船医',desc:'礼貌、冷静、几乎不出错。他随身带着一本写满字的病例。',mood:'表面可靠'},
+  伊芙:{tag:'贵宾乘客',desc:'优雅、富有、记得一些“不可能存在”的往事。',mood:'观察你'},
+  沈曜:{tag:'摄影师',desc:'替邮轮拍宣传照。他习惯每天拍同一个角度。',mood:'好奇'},
+  玛芙:{tag:'驻船表演者',desc:'每天晚间拉同一首曲子，但曲谱正在一点点改变。',mood:'礼貌'},
+  阿岚:{tag:'闯关者',desc:'来自大厅的其他玩家。很会说话，也很会把自己藏起来。',mood:'主动搭话'},
+  寂:{tag:'闯关者',desc:'几乎像 NPC 一样行动的安静男人。偶尔会露出系统权限。',mood:'保持距离'},
+  绒团团:{tag:'未注册观察对象',desc:'漂亮的白兔子。粉色耳尖和尾巴。喜欢甜食、漂亮东西，以及骗你的积分。',mood:'想吃蛋糕'}
+ }
+};
+const rooms={
+ '大厅':{sub:'前台 / 大堂吧 / 电梯',desc:'灯光像高档酒店，前台却空着。墙上的海报写着“七夜之后抵达目的地”。'},
+ '餐厅':{sub:'自助餐 / 观景窗 / 酒窖门',desc:'银器、香槟和温热甜点一应俱全。服务员的笑容漂亮得像一张印刷品。'},
+ '赌场':{sub:'赌桌 / 棋牌室 / 贵宾厅',desc:'筹码永远不会落地。有人输掉一大笔钱，却像从未发生过一样继续下注。'},
+ '舞厅':{sub:'舞池 / 乐队台 / 包厢',desc:'玛芙今晚演奏第三次相同的曲子。你隐约听出少了一个音符。'},
+ '甲板':{sub:'泳池 / 观景台 / 救生艇',desc:'海风很舒服。远处没有灯塔，只有一条像墨水一样平静的海。'},
+ '客舱':{sub:'407 / 408 / 员工通道',desc:'你的舱房就在这里。门牌上的数字比船票上的更旧。'},
+ '船员区':{sub:'监控室 / 休息室 / 禁止进入区',desc:'这里没有客人的香水味，只有油、盐和旧金属。'},
+ '第七层':{sub:'封闭甲板 / 旧舱段',desc:'船的蓝图里没有这一层。电梯却坚持认为它存在。'}
+};
+function portrait(type){
+ const skins={顾医生:['#d8b79f','#34404f','#f5f5f5'],伊芙:['#d8b19c','#3a2731','#d0a96c'],沈曜:['#c8997d','#2e3b4f','#212a35'],玛芙:['#dfb9a7','#4a3046','#b77e9f'],阿岚:['#c99c83','#3b3347','#e5b46e'],寂:['#bea087','#2b2f3c','#555f70'],绒团团:['#fff','#f0a6c8','#f8cadc']};
+ const s=skins[type]||skins.绒团团; if(type==='绒团团')return `<svg viewBox="0 0 120 140"><rect width="120" height="140" rx="18" fill="#f0b5cf"/><ellipse cx="60" cy="71" rx="38" ry="37" fill="white"/><path d="M30 52Q17 8 38 25L51 45M90 52Q103 8 82 25L69 45" fill="white" stroke="#f0a6c8" stroke-width="7"/><circle cx="48" cy="70" r="3.5" fill="#292431"/><circle cx="72" cy="70" r="3.5" fill="#292431"/><path d="M55 84Q60 88 65 84" fill="none" stroke="#5b3b4a" stroke-width="2.5"/><circle cx="60" cy="100" r="9" fill="#ffd1e3"/></svg>`;
+ return `<svg viewBox="0 0 120 140"><rect width="120" height="140" rx="18" fill="#151d2a"/><path d="M23 132Q24 98 60 94Q96 98 97 132" fill="${s[2]}"/><circle cx="60" cy="56" r="31" fill="${s[0]}"/><path d="M29 53Q32 18 62 22Q92 20 94 58Q79 38 60 42Q42 40 29 53" fill="${s[1]}"/><circle cx="49" cy="57" r="3" fill="#23252e"/><circle cx="71" cy="57" r="3" fill="#23252e"/><path d="M51 74Q60 80 69 74" fill="none" stroke="#563d42" stroke-width="2"/><path d="M45 102Q60 110 75 102" fill="none" stroke="#fafafa" stroke-width="3" opacity=".35"/></svg>`;
+}
+function $id(x){return document.getElementById(x)}
+function fmt(t){t%=1440;return String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0')}
+function say(txt){game.logs.unshift(txt);if(game.logs.length>36)game.logs.pop();renderLog()}
+function gainExp(n){game.exp+=n}
+function addPts(n){game.points=Math.max(0,game.points+n)}
+function clue(n=1){game.clues+=n}
+function use(item){game.inventory.push(item)}
+function has(item){return game.inventory.includes(item)}
+function advance(min=8){game.time+=min;game.pressure=Math.min(100,game.pressure+Math.max(0,Math.floor(min/5))); if(game.time>=24*60+180 && !game.flags.has('broadcast')) broadcast(); if(game.time>=24*60+300 && !game.flags.has('nightEnd')) endNight(); renderAll()}
+function visit(id){game.visited.add(id);game.explore=Math.min(100,Math.round((game.visited.size/22)*100))}
+function modal(tag,title,text,quote,buttons){$id('modalTag').textContent=tag;$id('modalTitle').innerHTML=title;$id('modalText').innerHTML=text;$id('modalQuote').innerHTML=quote;$id('modalChoices').innerHTML=buttons.map((b,i)=>`<button class="modalBtn" onclick="modalPick(${i})">${b[0]}</button>`).join('');window._modalButtons=buttons;$id('modal').classList.remove('hidden')}
+function modalPick(i){const f=window._modalButtons[i][1];$id('modal').classList.add('hidden');f();renderAll()}
+function toast(t){const e=$id('toast');e.textContent=t;e.classList.add('show');clearTimeout(window._toast);window._toast=setTimeout(()=>e.classList.remove('show'),1800)}
+function intro(){modal('副本载入','忒修斯号','你在登船口发现一张没有寄件人的船票。上面只有你的姓名、舱房 407，以及一行字：<br><br><b>“请于 23:40 前登船。你已经迟到过三次。”</b>','你完全不记得自己来过这里。<br>但检票员却对你说：“欢迎回来。”',[['登船',start],['转身离开',()=>{start();game.pressure+=8;say('<b>选择：</b>你曾试图离开，但船票上的姓名变了。');}]] )}
+function start(){game.started=true;game.flags.add('started');say('<b>登船：</b>你在23:40进入忒修斯号。');game.location='大厅';write(`
+<p class="sys">23:40 · 第一夜</p><p>你踏上甲板。</p><p>船很漂亮。不是“有点漂亮”的程度，而是那种让人下意识放轻声音的漂亮：黄铜栏杆、深蓝地毯、暖金色灯光，巨大的玻璃窗外是一片没有尽头的黑海。</p><p>检票员把房卡递给你。</p><p class="dim">“407。早餐六点开始。不要错过第二次广播。”</p><p>“第二次？”</p><p class="dim">他像没听见。</p><p>现在，没有人要求你做任何事情。</p><p class="gold">你可以先玩、吃东西、认识人、到处走走，也可以立刻调查这张奇怪的船票。</p>`);say('<b>系统：</b>你可以自由探索。');}
+function write(html){$id('story').innerHTML=html}
+function setChoices(arr){$id('choices').innerHTML=arr.map((a,i)=>`<button class="choice" onclick="choice(${i})">${a[0]}<small>${a[1]||''}</small></button>`).join('');window._choices=arr}
+function choice(i){const f=window._choices[i][2];f();renderAll()}
+function go(where){game.location=where;advance(6);visit('loc-'+where);say(`<b>移动：</b>你来到${where}。`);scene(where)}
+function scene(where){const data=rooms[where];$id('eyebrow').textContent=`${where} / ${fmt(game.time)}`;$id('title').textContent=where;$id('desc').textContent=data.desc;let quick=[];
+ if(where==='大厅')quick=[['调查前台','前台资料与广播'],['电梯','查看楼层面板'],['找绒团团','它可能在吃东西']];
+ if(where==='餐厅')quick=[['吃自助餐','恢复理智 + 小概率线索'],['找人聊天','认识核心乘客'],['甜点区','漂亮的东西容易惹事']];
+ if(where==='赌场')quick=[['小赌一把','高风险赚积分'],['观察赌桌','找出不合理之处'],['去贵宾厅','需要一定的信任']];
+ if(where==='舞厅')quick=[['听演出','发现音乐异常'],['邀请人跳舞','社交 / 信息'],['找玛芙','她正在等你问问题']];
+ if(where==='甲板')quick=[['看海','安静但不一定安全'],['泳池','检查水面下的东西'],['救生艇','数一数到底有几艘']];
+ if(where==='客舱')quick=[['进入407','查看自己的房间'],['敲408','和住客打招呼'],['找员工通道','不推荐']];
+ if(where==='船员区')quick=[['旧监控室','查看时间记录'],['员工休息室','偷听'],['禁入门','你知道自己不该开']];
+ if(where==='第七层')quick=[['调查旧舱段','蓝图不存在的区域'],['找回电梯','返回'],['看看海','这里的海不一样']];
+ $id('quick').innerHTML=quick.map((q,i)=>`<button onclick="quickAction('${where}',${i})">${q[0]}</button>`).join('');if(where==='大厅')sceneLobby();else if(where==='餐厅')sceneRestaurant();else if(where==='赌场')sceneCasino();else if(where==='舞厅')sceneDance();else if(where==='甲板')sceneDeck();else if(where==='客舱')sceneCabin();else if(where==='船员区')sceneCrew();else sceneSeventh();}
+function quickAction(where,i){advance(5);visit(where+'-'+i);if(where==='大厅') [inspectFront,elevator,meetRabbit][i]();else if(where==='餐厅')[eat,restaurantPeople,dessert][i]();else if(where==='赌场')[gamble,watchGamble,vip][i]();else if(where==='舞厅')[concert,danceWith,mav][i]();else if(where==='甲板')[sea,pool,lifeboat][i]();else if(where==='客舱')[room407,room408,staffCorridor][i]();else if(where==='船员区')[monitor,staffLounge,forbidDoor][i]();else [seventh,goBackElevator,seventhSea][i]();renderAll()}
+function sceneLobby(){write(`<p>大堂吧里有人，但没人像游客。</p><p>你看到顾医生翻病例，伊芙端着一杯香槟，沈曜在拍照。另一侧有两个看起来特别“像普通乘客”的人——阿岚和寂。</p><p class="dim">你目前不需要完成任务。你只需要决定：这艘船值不值得你花时间。</p>`);setChoices([["去餐厅","看看正常的邮轮生活",()=>go('餐厅')],["去赌场","先赚点积分",()=>go('赌场')],["去舞厅","听第一场演出",()=>go('舞厅')],["去甲板","看看海",()=>go('甲板')],["进入客舱","先看看407",()=>go('客舱')]])}
+function sceneRestaurant(){write(`<p>自助餐热得反常，草莓、奶油和海鲜一字排开。玻璃窗外的海面平得像一块黑色玻璃。</p><p class="gold">你可以只是吃饭。没什么坏处。</p>`);setChoices([["回大厅","换个方向",()=>go('大厅')],["去赌场","消磨时间",()=>go('赌场')],["去舞厅","看演出",()=>go('舞厅')]])}
+function sceneCasino(){write(`<p>赌场里没有钟。</p><p>每一张赌桌旁都有两三个乘客。一个戴白手套的荷官从不眨眼。</p><p class="dim">你可以赌。这里允许你浪费时间，也允许你赚回一点。</p>`);setChoices([["回大厅","",()=>go('大厅')],["去餐厅","",()=>go('餐厅')],["去甲板","",()=>go('甲板')]])}
+function sceneDance(){write(`<p>灯光压得很低。玛芙站在乐队台中央，演奏一首很漂亮的曲子。</p><p>你第一次听时，只觉得好听。</p><p class="dim">第二次听时，你会发现少了什么。</p>`);setChoices([["回大厅","",()=>go('大厅')],["去餐厅","",()=>go('餐厅')],["去甲板","",()=>go('甲板')]])}
+function sceneDeck(){write(`<p>风很舒服。</p><p>海面上没有任何其他船只，也没有远处城市的光。</p><p class="dim">你突然意识到：如果这真的是一艘正常邮轮，至少应该能看到一点东西。</p>`);setChoices([["回大厅","",()=>go('大厅')],["去客舱","",()=>go('客舱')],["去第七层","电梯居然会停在这里",()=>go('第七层')]])}
+function sceneCabin(){write(`<p>你站在客舱走廊。</p><p>407就在眼前。门牌很旧，但船票上的407很新。</p>`);setChoices([["进407","",()=>room407()],["敲408","",()=>room408()],["回大厅","",()=>go('大厅')]])}
+function sceneCrew(){write(`<p>船员区没有音乐。</p><p>油、盐、金属和洗衣粉的味道混在一起。你第一次感觉到这艘船不是“度假设施”，而是一台巨大机器。</p>`);setChoices([["回大厅","",()=>go('大厅')],["去第七层","",()=>go('第七层')]])}
+function sceneSeventh(){write(`<p class="warn">第七层没有地毯。</p><p>墙面是裸露的钢板，灯管亮得发白。</p><p>最奇怪的是：你向前走十几米后，电梯门还在身后原来的位置。</p><p class="gold">这里不像一层船舱，更像“替换之前留下来的东西”。</p>`);setChoices([["回大厅","",()=>go('大厅')],["调查旧舱段","找线索",()=>seventh()],["回电梯","",()=>goBackElevator()]])}
+function inspectFront(){if(!game.flags.has('front')){game.flags.add('front');clue();gainExp(30);say('<b>线索：</b>前台登记系统显示“乘客总数：108”，但你只看到不到二十个人。');write(`<p>前台电脑没有锁。</p><p>今晚的乘客登记表只有几页。</p><p class="gold">【客舱 407】——你的名字。</p><p>再往下翻。</p><p>【客舱 407】——同一个名字。</p><p>日期不同。</p><p class="warn">你发现至少有三次登记记录，都是你。</p>`)}else{write(`<p>电脑还在。</p><p class="warn">登记系统里的你的记录，从“三次”变成了“四次”。</p>`);game.pressure+=8;clue()}}
+function elevator(){write(`<p>楼层按钮依次是：B1、1、2、3、4、5、6、<b>7</b>。</p><p class="dim">蓝图上没有7。</p>`);if(!game.flags.has('elevator')){game.flags.add('elevator');clue();game.pressure+=7;say('<b>异常：</b>电梯面板存在蓝图中不存在的第七层。')}}
+function meetRabbit(){if(!game.flags.has('rabbit')){game.flags.add('rabbit');say('<b>绒团团：</b>它说“你又登船啦”，然后装作自己什么都没说。');write(`<p>大堂柱子后面蹲着一只白兔子。</p><p>它漂亮得过分，粉色耳尖，粉色尾巴，手里还抱着一块草莓蛋糕。</p><p class="rabbit"><b>绒团团：</b>“你又登船啦。”</p><p>你愣住。</p><p>它眨眨眼。</p><p class="rabbit">“我说你看起来像会登船的人。”</p><p class="dim">它明明已经知道你是谁。</p>`);modal('未注册观察对象','绒团团的小生意','它指着一个漂亮的粉色糖果盒。','“一百积分。吃了会幸运。”<br>它的表情非常天真。',[['买','我就是想被坑一次',()=>buyCandy()],['不买，问它身份','直接问真相',()=>askRabbit()],['问它为什么认识我','把球踢回去',()=>pressRabbit()]] )}else{write(`<p class="rabbit">绒团团正在吃蛋糕。</p><p>看见你，它慢慢把蛋糕往身后藏。</p><p class="rabbit">“你没看见。”</p>`);}}
+function buyCandy(){addPts(-100);use('幸运糖包装');game.rabbitMood+=2;game.pressure+=2;write(`<p>你付了100积分。</p><p class="rabbit">绒团团：“成交！”</p><p>它把糖塞给你。</p><p class="rabbit">“连续吃十颗才有效哦。”</p><p class="warn">你终于确定：它就是故意的。</p>`);say('<b>绒团团交易：</b>你花100积分买到一颗“幸运糖”。')}
+function askRabbit(){game.rabbitMood+=1;write(`<p>你问它：“你到底是什么？”</p><p class="rabbit">绒团团：“我是绒团团呀。”</p><p>“我不是问名字。”</p><p class="rabbit">“可是我也不知道你在问什么。”</p><p class="dim">它低头继续吃蛋糕，像是已经厌倦了这个问题。</p>`);say('<b>绒团团：</b>拒绝解释自己的身份。')}
+function pressRabbit(){write(`<p>你问它为什么认识你。</p><p class="rabbit">“因为你很有名呀。”</p><p>“在谁那里？”</p><p class="rabbit">“在我这里。”</p><p>它眯着漂亮的眼睛。</p><p class="rabbit">“你这次是不是想活久一点？”</p>`);game.rabbitMood+=2;clue();say('<b>绒团团：</b>它暗示你已经来过不止一次。')}
+function eat(){game.sanity=Math.min(100,game.sanity+5);if(!game.flags.has('eat')){game.flags.add('eat');game.explore+=2;write(`<p>你认真吃了一会儿。</p><p>这是目前最像“正常生活”的十分钟。</p><p>你甚至有点不想调查了。</p><p class="gold">然而甜点区少了一块草莓蛋糕。</p>`)}else write(`<p>你吃了一些东西。</p><p class="good">理智 +5。</p>`)}
+function restaurantPeople(){write(`<p>你先找顾医生。</p><p class="gold">顾医生：“你的脸色不太好。”</p><p>你问他船上有没有奇怪的地方。</p><p>他停了一秒。</p><p class="gold">“医学上，我不建议你相信镜子。”</p><p class="dim">这回答比“不建议”本身更奇怪。</p>`);game.trust.顾医生++;if(!game.flags.has('doc')){game.flags.add('doc');clue();gainExp(40);say('<b>顾医生：</b>提醒你不要轻信镜子。')}}
+function dessert(){game.rabbitMood+=1;if(!game.flags.has('dessert')){game.flags.add('dessert');clue();gainExp(30);use('粉色缎带');write(`<p>甜点盘下面压着一张收据。</p><p class="gold">03:17 · 407 · 草莓蛋糕 ×1</p><p>你自己的房间。</p><p class="warn">你现在还没睡觉。</p><p>收据已经是第二张了。</p>`);say('<b>线索：</b>你的房间在03:17购买过草莓蛋糕。')}else{write(`<p>绒团团盯着那盘蛋糕。</p><p class="rabbit">“漂亮的东西应该被好好吃掉。”</p>`);}}
+function gamble(){const r=Math.random();if(r>.52){const n=120+Math.floor(Math.random()*280);addPts(n);game.casino+=n;gainExp(20);write(`<p>你押了一手。</p><p class="good">赢了 ${n} 积分。</p><p>荷官没有任何表情。</p>`);say(`<b>赌场：</b>你赢了${n}积分。`)}else{const n=80+Math.floor(Math.random()*180);addPts(-n);game.casino-=n;game.pressure+=5;write(`<p>你输了 ${n} 积分。</p><p>荷官微笑。</p><p class="warn">桌上的总筹码数恰好又恢复成 108 枚。</p>`);if(!game.flags.has('108')){game.flags.add('108');clue();say('<b>异常：</b>赌桌筹码总数永远是108。')}}}
+function watchGamble(){clue();game.pressure+=3;write(`<p>你盯着一张赌桌。</p><p>每当有人输掉筹码，桌上总数会在几秒后恢复。</p><p class="warn">108。</p><p>你开始怀疑这张桌子统计的不是钱。</p>`);say('<b>线索：</b>赌桌上的筹码总量似乎在统计别的东西。')}
+function vip(){if(game.trust.伊芙>=1||game.flags.has('vip')){game.flags.add('vip');write(`<p>伊芙看着你。</p><p class="gold">“你终于问到这里了。”</p><p>她把贵宾厅门卡递给你。</p><p class="warn">“但进去以后，不要先看镜子。”</p>`);use('贵宾厅门卡');gainExp(60)}else{write(`<p>贵宾厅的门没有开。</p><p>门卫问你是否受邀。</p><p class="dim">你还没有足够的信任或理由。</p>`)}}
+function concert(){if(!game.flags.has('music')){game.flags.add('music');clue();gainExp(35);write(`<p>玛芙开始演奏。</p><p>第一遍完整。</p><p>第二遍，倒数第四个音符消失。</p><p>第三遍，所有人都像没听见。</p><p class="warn">只有你和她同时抬头。</p>`);say('<b>玛芙：</b>你发现她的曲子每天少一个音符。')}else write(`<p>曲子又少了一个音。</p><p class="dim">你已经开始习惯它。</p>`)}
+function danceWith(){game.trust.玛芙++;game.sanity=Math.min(100,game.sanity+2);write(`<p>你邀请玛芙跳舞。</p><p>她先是一愣，然后笑了。</p><p class="gold">“谢谢。今晚第一次有人看着我，而不是看着我身后的海。”</p><p class="dim">她的手很冷。</p>`);say('<b>关系：</b>你和玛芙更熟悉了。')}
+function mav(){game.trust.玛芙+=2;write(`<p>玛芙把曲谱摊开。</p><p>乐谱上有七个小方框，每晚会少一个。</p><p class="gold">“船每换一次东西，就少一个音。”</p><p>“你是说船在被替换？”</p><p>她没有回答。</p>`);if(!game.flags.has('score')){game.flags.add('score');clue();say('<b>玛芙：</b>“船每换一次东西，就少一个音。”')}}
+function sea(){write(`<p>你站在栏杆边。</p><p>海风很舒服。</p><p class="dim">你没有看到月亮的倒影。</p><p class="warn">但海面上有一艘和忒修斯号一模一样的船。</p>`);if(!game.flags.has('otherShip')){game.flags.add('otherShip');clue();game.pressure+=9;say('<b>异常：</b>海面上出现另一艘忒修斯号。')}}
+function pool(){game.pressure+=7;write(`<p>泳池水面一片平静。</p><p>你潜下去。</p><p class="warn">水下有一扇门。</p><p>门牌不是房号。</p><p class="gold">是一个名字。</p>`);if(!game.flags.has('pool')){game.flags.add('pool');clue();say('<b>隐藏线索：</b>泳池底有一扇写着人名的门。')}}
+function lifeboat(){clue();write(`<p>你数救生艇。</p><p>船上标注着 <b>12</b> 艘。</p><p>实际看到的是 11 艘。</p><p class="warn">第12个位置有一块被拆过的螺丝。</p>`);say('<b>线索：</b>救生艇记录比实际数量多一艘。')}
+function room407(){if(!game.flags.has('407')){game.flags.add('407');clue();gainExp(45);write(`<p>407 的门开得很轻。</p><p>房间没有问题。床、衣柜、海景窗，一切都很正常。</p><p>只有床头柜上的相框不对。</p><p class="warn">照片里是你，站在这间房间里。</p><p>照片日期：三年前。</p><p class="dim">你完全不记得这件事。</p>`);say('<b>线索：</b>407里有三年前的你的照片。')}else{write(`<p>407。</p><p class="dim">房间看起来正常。你的记忆却越来越不正常。</p>`)} }
+function room408(){game.trust.伊芙++;if(game.trust.伊芙===1){write(`<p>408 的门开了一条缝。</p><p>伊芙站在那里。</p><p class="gold">“你也住407？”</p><p>她看了一眼你的房卡。</p><p class="warn">“那就不要相信你的照片。”</p>`);say('<b>伊芙：</b>她知道407，也知道你不该相信照片。');}else{write(`<p>伊芙递给你一把小钥匙。</p><p class="gold">“贵宾厅。你如果发现自己不认识某个人了，就来找我。”</p>`);game.flags.add('ivKey');use('小钥匙')}}
+function staffCorridor(){game.pressure+=10;write(`<p class="warn">你不该进这里。</p><p>门后通向员工区。</p><p>墙上的维修记录写着：</p><p class="gold">“本周更换船体结构 17% / 更换客舱 9% / 更换乘客名单 —— 完成。”</p>`);if(!game.flags.has('repair')){game.flags.add('repair');clue(2);say('<b>重大线索：</b>维修记录把“乘客名单”也列入了替换项。')}}
+function monitor(){clue();game.pressure+=9;write(`<p>旧监控室里有十二块屏幕。</p><p>全部显示大厅。</p><p>时间却分别是：22:10、23:40、01:12、03:17……</p><p class="warn">最后一块屏幕里，站着一个你不认识的你。</p>`);say('<b>监控：</b>屏幕里存在不同版本的你。')}
+function staffLounge(){write(`<p>你偷听到两个船员。</p><p class="dim">“这一批稳定吗？”</p><p class="dim">“还不知道。407看起来最难替。”</p><p>你没有继续听。</p>`);if(!game.flags.has('staffTalk')){game.flags.add('staffTalk');clue();say('<b>偷听：</b>船员提到“407最难替”。')}}
+function forbidDoor(){modal('船员警告','门后的声音','门没有锁。门后却传来一句很清楚的话：<br><br><b>“请把你自己留在原来的地方。”</b>','你并没有告诉任何人你的房间号码。',[['打开门',()=>{game.pressure+=25;game.sanity-=12;clue();game.flags.add('badDoor');write(`<p class="warn">你打开门。</p><p>里面没有东西。</p><p>但门外已经不是原来的走廊。</p><p class="warn">你的房卡从407变成了 507。</p>`);say('<b>重大异常：</b>你打开了不该开的门，自己的房号发生改变。')}],['关门',()=>{game.pressure+=2;write('<p>你关上门。</p><p class="good">至少今晚还不用知道门后是什么。</p>')}]] )}
+function seventh(){game.pressure+=12;clue();gainExp(80);write(`<p>旧舱段里堆着被拆下来的船体零件。</p><p>一块黄铜牌上刻着：</p><p class="gold">“忒修斯号，初航前拆解记录。”</p><p>日期：比你出生早很多年。</p><p class="warn">旁边是一张旧照片：船上站着一群乘客。</p><p>每个人的脸都被划掉了。</p><p>只有角落里的白兔子没有。</p>`);say('<b>重大线索：</b>旧舱段里有更古老版本的忒修斯号与绒团团。')}
+function goBackElevator(){game.location='大厅';advance(5);scene('大厅')}
+function seventhSea(){game.sanity-=5;game.pressure+=8;write(`<p>第七层的窗外不是海。</p><p class="warn">是静止的雾。</p><p>雾里有很多灯。</p><p>像某种城市。</p>`)}
+function broadcast(){game.flags.add('broadcast');game.pressure+=12;write(`<p class="warn">广播响起。</p><p class="gold">“各位乘客，请注意。第一次广播已经完成。”</p><p>你突然想起什么。</p><p class="warn">“第二次广播时，请不要回答自己的名字。”</p>`);say('<b>第一次广播：</b>提醒乘客不要回答第二次广播。')}
+function secondBroadcast(){if(game.flags.has('secondBroadcast'))return;game.flags.add('secondBroadcast');game.pressure+=18;modal('第二次广播','请勿回答你的名字','广播温柔地念出了一个名字。<br><br><b>'+"你的名字"+'</b>。<br><br>然后停顿。','你突然很想回答。那几乎是一种本能。',[['回答“到”',()=>{game.sanity-=18;game.pressure+=25;game.flags.add('answered');write('<p class="warn">你回答了。</p><p>广播停了。</p><p class="warn">大堂所有镜子里的你都回头看向了你。</p>');say('<b>错误：</b>你回答了自己的名字。')}],['保持沉默',()=>{game.flags.add('silent');game.points+=120;gainExp(70)}]] )}
+function endNight(){if(game.flags.has('nightEnd'))return;game.flags.add('nightEnd');secondBroadcast();setTimeout(()=>{},0)}
+function fakeAI(){let traits=[];if(game.casino>200)traits.push('赌徒');if(game.clues>=5)traits.push('调查者');if(game.rabbitMood>=3)traits.push('绒团团偏爱者');if(game.pressure>=55)traits.push('冒险者');if(game.peopleSaved>0)traits.push('救援者');if(game.flags.has('answered'))traits.push('规则破坏者');if(game.casino<0)traits.push('机会主义者');if(!traits.length)traits.push('观察者');return traits.slice(0,3)}
+function finish(){
+ const survived=game.sanity>0;let ending='普通生还';if(game.flags.has('answered'))ending='被记住的乘客';else if(game.clues>=8&&game.pressure>=60)ending='偷看到真相的人';else if(game.rabbitMood>=4&&game.clues<8)ending='兔子保住的乘客';else if(game.casino>300)ending='赌桌上的幸存者';
+ const rating=Math.min(100,40+game.clues*4+Math.floor(game.explore*.25)+(game.peopleSaved*6)-(game.peopleLost*6));const traits=fakeAI();
+ modal('航行结算',ending,`<b>生还：</b>${survived?'是':'否'}<br><b>身份稳定：</b>${Math.max(0,100-game.pressure)}%<br><b>探索度：</b>${game.explore}%<br><b>线索：</b>${game.clues}<br><b>积分：</b>${game.points}<br><b>经验：</b>${game.exp}`,`AI 风格行为总结：<br><b>${traits.join(' / ')}</b><br><br>${rating>=75?'你不是在按剧情走，你已经开始把副本当成自己的世界。':'你已经开始摸到这个副本的表面。真正的航行才刚刚开始。'}<br><br><span class="rabbit">绒团团：“还行。下次给我带蛋糕。”</span>`,[['回到大厅（测试）',()=>{game.flags.add('finished');game.location='大厅';write(`<p class="gold">副本结算完成。</p><p>你获得了长期记录。正式版本里，这里会进入大厅、等级、称号、异能与下一副本选择。</p><p class="rabbit">绒团团：“你要不要再来一次？”</p>`);gainExp(200)}],['再玩第一夜',()=>location.reload()]] )
+}
+function save(){localStorage.setItem('thesis_proto',JSON.stringify({...game,flags:[...game.flags],visited:[...game.visited]}));toast('已保存')}
+function load(){const s=localStorage.getItem('thesis_proto');if(!s){toast('没有找到存档');return}const x=JSON.parse(s);Object.assign(game,x);game.flags=new Set(x.flags);game.visited=new Set(x.visited);toast('已读取');renderAll()}
+function renderStats(){const blocks=[['时间',fmt(game.time)],['理智',game.sanity],['积分',game.points],['经验',game.exp],['线索',game.clues],['压力',game.pressure]];$id('stats').innerHTML=blocks.map(b=>`<div class="pill"><span>${b[0]}</span><b>${b[1]}</b></div>`).join('')}
+function renderRooms(){$id('rooms').innerHTML=Object.entries(rooms).map(([n,v])=>`<button class="roomBtn ${game.location===n?'active':''}" onclick="go('${n}')"><div class="roomName"><span>${n}</span><span>›</span></div><div class="roomSub">${v.sub}</div></button>`).join('')}
+function renderSide(){const active=['顾医生','伊芙','沈曜','玛芙','阿岚','寂','绒团团'];let html='<div class="miniPanel"><h3>附近的人</h3>';for(const n of active){const d=game.npc[n];html+=`<div class="portraitRow"><div class="portrait">${portrait(n)}</div><div><p class="charName">${n}</p><div class="charDesc">${d.desc}</div><span class="tag">${d.tag} · ${d.mood}</span></div></div>`}html+='</div>';
+ html+=`<div class="miniPanel"><h3>当前目标</h3><div class="goal"><strong>${goal()}</strong></div></div>`;$id('side').innerHTML=html}
+function goal(){if(!game.flags.has('started'))return '登船。先看清楚自己为什么会在船上。';if(game.clues<3)return '自由玩一会儿，认识人，找到至少3条不合理的细节。';if(!game.flags.has('music'))return '继续探索。别急着解答“忒修斯号”——先让它成为一个你愿意待着的地方。';if(!game.flags.has('repair'))return '寻找关于“替换”的直接证据。';if(game.time<24*60+180)return '第一夜还没结束。你可以吃饭、赌博、社交、收集、探索，或者去碰那些不该碰的东西。';return '熬到第二次广播，并决定你是否回答自己的名字。'}
+function renderLog(){$id('log').innerHTML=game.logs.map(x=>`<div>${x}</div>`).join('')}
+function renderMeters(){$id('meters').innerHTML=`<div class="meter"><div class="meterTop"><span>探索度</span><b>${game.explore}%</b></div><div class="bar"><div class="fill" style="width:${game.explore}%"></div></div></div><div class="meter"><div class="meterTop"><span>异常压力</span><b>${game.pressure}/100</b></div><div class="bar"><div class="fill" style="width:${game.pressure}%"></div></div></div><div class="meter"><div class="meterTop"><span>理智</span><b>${game.sanity}%</b></div><div class="bar"><div class="fill" style="width:${Math.max(0,game.sanity)}%"></div></div></div>`}
+function renderAll(){renderStats();renderRooms();renderMeters();renderSide();renderLog();$id('eyebrow').textContent=`${game.location} / ${fmt(game.time)}`}
+window.addEventListener('beforeunload',save);
+renderAll();
+intro();
+</script>
+</body></html>
